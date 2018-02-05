@@ -27,8 +27,8 @@
       <file leaf-file-name="core.clj" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/report/core.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="520">
-              <caret line="232" column="0" lean-forward="true" selection-start-line="232" selection-start-column="0" selection-end-line="232" selection-end-column="0" />
+            <state relative-caret-position="1725">
+              <caret line="233" column="99" lean-forward="false" selection-start-line="233" selection-start-column="99" selection-end-line="233" selection-end-column="99" />
               <folding />
             </state>
           </provider>
@@ -107,7 +107,7 @@
     <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/project.clj" />
   </component>
-  <component name="ReplState" timestamp="1517859638694">{:repl-history {:ide [], :local [{:command &quot;(go)&quot;, :offset 4, :ns &quot;user&quot;} {:command &quot;(report.core/-main)&quot;, :offset 19, :ns &quot;user&quot;} {:command &quot;(empty? \&quot; \&quot;)&quot;, :offset 12, :ns &quot;user&quot;} {:command &quot;(require 'report.core)&quot;, :offset 22, :ns &quot;user&quot;} {:command &quot;(def server (report.core/-main))&quot;, :offset 32, :ns &quot;user&quot;} {:command &quot;(stop)&quot;, :offset 6, :ns &quot;user&quot;}], :remote []}}</component>
+  <component name="ReplState" timestamp="1517861264375">{:repl-history {:ide [], :local [{:command &quot;(go)&quot;, :offset 4, :ns &quot;user&quot;} {:command &quot;(report.core/-main)&quot;, :offset 19, :ns &quot;user&quot;} {:command &quot;(empty? \&quot; \&quot;)&quot;, :offset 12, :ns &quot;user&quot;} {:command &quot;(stop)&quot;, :offset 6, :ns &quot;user&quot;} {:command &quot;(require 'report.core)&quot;, :offset 22, :ns &quot;user&quot;} {:command &quot;(def server (report.core/-main))&quot;, :offset 32, :ns &quot;user&quot;}], :remote []}}</component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -336,8 +336,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/report/core.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="520">
-          <caret line="232" column="0" lean-forward="true" selection-start-line="232" selection-start-column="0" selection-end-line="232" selection-end-column="0" />
+        <state relative-caret-position="1725">
+          <caret line="233" column="99" lean-forward="false" selection-start-line="233" selection-start-column="99" selection-end-line="233" selection-end-column="99" />
           <folding />
         </state>
       </provider>
