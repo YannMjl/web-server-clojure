@@ -116,20 +116,20 @@
 ;-----------------------------------------------------------------------------------------*
 
 (defn get-full-report []
-  (cj/query db ["SELECT DISTINCT ON (organization)\n
+  (cj/query (env :database-url) ["SELECT DISTINCT ON (organization)\n
                   organization, size, date\n
                   FROM report\nORDER BY organization"])
   )
 
 (defn get-full-report-of-date []
-  (cj/query db ["SELECT DISTINCT ON (date)\n
+  (cj/query (env :database-url) ["SELECT DISTINCT ON (date)\n
                   organization, size, date\n
                   FROM report\nORDER BY date DESC"])
   )
 
 (defn view-by-organization [org-name]
 
-  (cj/query db ["SELECT organization, size, date\n
+  (cj/query (env :database-url) ["SELECT organization, size, date\n
                  FROM report\n
                  WHERE organization = ?" org-name]))
 
@@ -137,16 +137,14 @@
 
   (let [_date (clt/to-sql-date (clt/to-string input))]
 
-    (cj/query db ["SELECT organization, size, date\n
-                   FROM report\n
-                   WHERE date = ?" _date])
+    (cj/query (env :database-url) ["SELECT organization, size, date FROM report WHERE date = ?" _date])
 
     )
   )
 
 (defn delete-by-name [org-name]
 
-  (cj/query db ["DELETE\n
+  (cj/query (env :database-url) ["DELETE\n
                  FROM report\n
                  WHERE organization = ?" org-name]
             )
@@ -157,7 +155,7 @@
 
   (let [_date (clt/to-sql-date (clt/to-string input))]
 
-    (cj/query db ["DELETE\n
+    (cj/query (env :database-url) ["DELETE\n
                    FROM report\n
                    WHERE date = ?" _date])
 
@@ -166,7 +164,7 @@
 
 (defn delete-full-report []
 
-  (cj/query db ["DELETE\n
+  (cj/query (env :database-url) ["DELETE\n
                  FROM report"]
             )
 
@@ -226,7 +224,7 @@
     (jetty/run-jetty (wrap-cors (wrap-multipart-params myroutes)
                                 :access-control-allow-methods [:get :post :delete :options]
                                 :access-control-allow-headers ["Content-Type" ]
-                                :access-control-allow-origin [#".*"]
+                                :access-control-allow-origin [#"http://localhost:4200"]
                                 )
                      {:port port :join? false}
                      )
