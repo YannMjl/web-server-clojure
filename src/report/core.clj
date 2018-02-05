@@ -224,14 +224,9 @@
   (let [port (Integer. (or port (env :port) 3000))]
 
     (jetty/run-jetty (wrap-cors (wrap-multipart-params myroutes)
-                                :access-control-allow-methods [:get :post :options]
-                                ;:access-control-allow-headers [#"Accept, Content-Type"]
-                                :access-control-allow-origin [#"http://localhost:4200"]
-                                :headers {"Content-Type"                     "application/json"
-                                          "Access-Control-Allow-Origin"      "*"
-                                          "Access-Control-Allow-Credentials" "false"
-                                          "Access-Control-Allow-Methods"     "POST, GET, OPTIONS"
-                                          "Access-Control-Allow-Headers"     "Accept, Content-Type"}
+                                :access-control-allow-methods [:get :post :delete :options]
+                                :access-control-allow-headers ["Content-Type" ]
+                                :access-control-allow-origin [#".*"]
                                 )
                      {:port port :join? false}
                      )
