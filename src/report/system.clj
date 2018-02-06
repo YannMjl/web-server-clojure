@@ -20,21 +20,21 @@
 (defn system[route port]
   "Returns a new instance of the whole application."
 
-  {:db (env :database_url)
+  {:db        (System/getenv "DATABASE_URL")
 
-   :handler {:status  200
-             :headers {"Content-Type" "application/json"
-                       "Access-Control-Allow-Origin" "*"
-                       "Access-Control-Allow-Credentials" "false"
-                       "Access-Control-Allow-Methods" "POST, GET, OPTIONS"
-                       "Access-Control-Allow-Headers" "Accept, Content-Type"}
-             }
+   :handler   {:status  200
+               :headers {"Content-Type"                     "application/json"
+                         "Access-Control-Allow-Origin"      "*"
+                         "Access-Control-Allow-Credentials" "false"
+                         "Access-Control-Allow-Methods"     "POST, GET, OPTIONS"
+                         "Access-Control-Allow-Headers"     "Accept, Content-Type"}
+               }
 
-   :route route
+   :route     route
 
    :webserver nil
 
-   :port port
+   :port      port
    }
   )
 
@@ -50,8 +50,8 @@
   and start it running. Returns an updated instance of the system."
   (let [port (Integer. (env :port "5000"))
         server (jetty/run-jetty (wrap-cors (wrap-multipart-params (:route system))
-                                           :access-control-allow-methods [:get :post :options]
-                                           ;:access-control-allow-headers [#"Accept, Content-Type"]
+                                           :access-control-allow-methods [:get :post :delete :options]
+                                           :access-control-allow-headers ["Accept, Content-Type"]
                                            :access-control-allow-origin [#"http://localhost:4200"]
                                            )
                                 {:port port :join? false})]

@@ -32,6 +32,7 @@
 
   :plugins [[lein-ring "0.12.2"]
             [lein-heroku "0.5.3"]
+            [lein-environ "1.1.0"]
             [environ/environ.lein "0.3.1"]]
 
   :hooks [environ.leiningen.hooks]

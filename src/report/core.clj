@@ -12,9 +12,6 @@
             [clj-time.coerce :as clt]
             [environ.core :refer [env]]
 
-            [report.system :as system]
-            [com.stuartsierra.component :as component]
-
             [ring.adapter.jetty :as jetty]
             [ring.util.response :refer [response]]
             [ring.middleware.cors :refer [wrap-cors]]
@@ -37,7 +34,8 @@
   )
 
 ;connect to the database
-(def db (env :database_url))
+(def db (System/getenv "DATABASE_URL"))
+(def db-url (env :database-url))
 
 ;-----------------------------------------------------------------------------------------*
 ;this section content functions that do multiple operation on the csv file in order to    *
@@ -116,28 +114,28 @@
 ;-----------------------------------------------------------------------------------------*
 
 (defn get-full-report []
-  (cj/query db ["SELECT DISTINCT ON (organization)\n
+  (cj/query (env :database-url) ["SELECT DISTINCT ON (organization)\n
                   organization, size, date\n
-                  FROM report\nORDER BY organization"])
+                  FROM cloudrepo_report\nORDER BY organization"])
   )
 
 (defn get-full-report-of-date []
   (cj/query db ["SELECT DISTINCT ON (date)\n
                   organization, size, date\n
-                  FROM report\nORDER BY date DESC"])
+                  FROM cloudrepo_report\nORDER BY date DESC"])
   )
 
 (defn view-by-organization [org-name]
 
   (cj/query db ["SELECT organization, size, date\n
-                 FROM report\n
+                 FROM cloudrepo_report\n
                  WHERE organization = ?" org-name]))
 
 (defn view-by-date [input]
 
   (let [_date (clt/to-sql-date (clt/to-string input))]
 
-    (cj/query db ["SELECT organization, size, date FROM report WHERE date = ?" _date])
+    (cj/query db ["SELECT organization, size, date FROM cloudrepo_report WHERE date = ?" _date])
 
     )
   )
@@ -145,7 +143,7 @@
 (defn delete-by-name [org-name]
 
   (cj/query db ["DELETE\n
-                 FROM report\n
+                 FROM cloudrepo_report\n
                  WHERE organization = ?" org-name]
             )
 
@@ -156,7 +154,7 @@
   (let [_date (clt/to-sql-date (clt/to-string input))]
 
     (cj/query db ["DELETE\n
-                   FROM report\n
+                   FROM cloudrepo_report\n
                    WHERE date = ?" _date])
 
     )
@@ -165,7 +163,7 @@
 (defn delete-full-report []
 
   (cj/query db ["DELETE\n
-                 FROM report"]
+                 FROM cloudrepo_report "]
             )
 
   )
@@ -191,7 +189,7 @@
            (GET "/report" [] (generate-string (get-full-report)))
            (GET "/date" [] (generate-string (get-full-report-of-date)))
            (GET "/date/:input" [input] (generate-string (view-by-date input)))
-           (GET "/:input" [input] (generate-string (view-by-organization input)))
+           (GET "/name/:input" [input] (generate-string (view-by-organization input)))
 
            (DELETE "/delete-date/:input" [input] (delete-by-date input))
            (DELETE "/delete-name/:input" [input] (delete-by-name input))
@@ -223,7 +221,7 @@
 
     (jetty/run-jetty (wrap-cors (wrap-multipart-params myroutes)
                                 :access-control-allow-methods [:get :post :delete :options]
-                                :access-control-allow-headers ["Content-Type" ]
+                                :access-control-allow-headers ["Accept, Content-Type"]
                                 :access-control-allow-origin [#"http://localhost:4200"]
                                 )
                      {:port port :join? false}
