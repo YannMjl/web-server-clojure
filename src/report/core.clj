@@ -90,9 +90,9 @@
         _size (:size report)
         _date (clt/to-sql-date (clt/to-string date))]
 
-    (cj/insert! db :report {:organization _name
-                            :size         _size
-                            :date         _date})
+    (cj/insert! db :cloudrepo_report {:organization _name
+                                      :size         _size
+                                      :date         _date})
     )
   )
 

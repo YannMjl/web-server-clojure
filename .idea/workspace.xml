@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bde85ace-93d2-4ead-970c-44528f3138d3" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/project.clj" afterPath="$PROJECT_DIR$/project.clj" />
       <change beforePath="$PROJECT_DIR$/src/report/core.clj" afterPath="$PROJECT_DIR$/src/report/core.clj" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,20 +14,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="core.clj" pinned="false" current-in-tab="false">
+      <file leaf-file-name="core.clj" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/report/core.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="180" column="68" lean-forward="false" selection-start-line="180" selection-start-column="68" selection-end-line="180" selection-end-column="68" />
+            <state relative-caret-position="521">
+              <caret line="99" column="42" lean-forward="true" selection-start-line="99" selection-start-column="42" selection-end-line="99" selection-end-column="42" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="project.clj" pinned="false" current-in-tab="true">
+      <file leaf-file-name="project.clj" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="444">
+            <state relative-caret-position="354">
               <caret line="41" column="29" lean-forward="false" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
               <folding />
             </state>
@@ -50,8 +49,8 @@
       <list>
         <option value="$PROJECT_DIR$/Procfile" />
         <option value="$PROJECT_DIR$/src/report/system.clj" />
-        <option value="$PROJECT_DIR$/src/report/core.clj" />
         <option value="$PROJECT_DIR$/project.clj" />
+        <option value="$PROJECT_DIR$/src/report/core.clj" />
       </list>
     </option>
   </component>
@@ -114,7 +113,7 @@
     <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/project.clj" />
   </component>
-  <component name="ReplState" timestamp="1517959042031">{:repl-history {:ide [], :local [{:command &quot;(require 'report.core)&quot;, :offset 22, :ns &quot;user&quot;} {:command &quot;(report.core/db)&quot;, :offset 16, :ns &quot;user&quot;} {:command &quot;(report.core/db-url)&quot;, :offset 20, :ns &quot;user&quot;} {:command &quot;(report.core/-main)&quot;, :offset 19, :ns &quot;user&quot;}], :remote []}}</component>
+  <component name="ReplState" timestamp="1517959410239">{:repl-history {:ide [], :local [{:command &quot;(require 'report.core)&quot;, :offset 22, :ns &quot;user&quot;} {:command &quot;(report.core/db)&quot;, :offset 16, :ns &quot;user&quot;} {:command &quot;(report.core/db-url)&quot;, :offset 20, :ns &quot;user&quot;} {:command &quot;(report.core/-main)&quot;, :offset 19, :ns &quot;user&quot;}], :remote []}}</component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -390,18 +389,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/report/core.clj">
+    <entry file="file://$PROJECT_DIR$/project.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="180" column="68" lean-forward="false" selection-start-line="180" selection-start-column="68" selection-end-line="180" selection-end-column="68" />
+        <state relative-caret-position="354">
+          <caret line="41" column="29" lean-forward="false" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/project.clj">
+    <entry file="file://$PROJECT_DIR$/src/report/core.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="41" column="29" lean-forward="false" selection-start-line="41" selection-start-column="29" selection-end-line="41" selection-end-column="29" />
+        <state relative-caret-position="521">
+          <caret line="99" column="42" lean-forward="true" selection-start-line="99" selection-start-column="42" selection-end-line="99" selection-end-column="42" />
           <folding />
         </state>
       </provider>
