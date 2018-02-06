@@ -37,7 +37,7 @@
   )
 
 ;connect to the database
-(def db (env :database-url))
+(def db (env :database_url))
 
 ;-----------------------------------------------------------------------------------------*
 ;this section content functions that do multiple operation on the csv file in order to    *
@@ -116,20 +116,20 @@
 ;-----------------------------------------------------------------------------------------*
 
 (defn get-full-report []
-  (cj/query (env :database-url) ["SELECT DISTINCT ON (organization)\n
+  (cj/query db ["SELECT DISTINCT ON (organization)\n
                   organization, size, date\n
                   FROM report\nORDER BY organization"])
   )
 
 (defn get-full-report-of-date []
-  (cj/query (env :database-url) ["SELECT DISTINCT ON (date)\n
+  (cj/query db ["SELECT DISTINCT ON (date)\n
                   organization, size, date\n
                   FROM report\nORDER BY date DESC"])
   )
 
 (defn view-by-organization [org-name]
 
-  (cj/query (env :database-url) ["SELECT organization, size, date\n
+  (cj/query db ["SELECT organization, size, date\n
                  FROM report\n
                  WHERE organization = ?" org-name]))
 
@@ -137,14 +137,14 @@
 
   (let [_date (clt/to-sql-date (clt/to-string input))]
 
-    (cj/query (env :database-url) ["SELECT organization, size, date FROM report WHERE date = ?" _date])
+    (cj/query db ["SELECT organization, size, date FROM report WHERE date = ?" _date])
 
     )
   )
 
 (defn delete-by-name [org-name]
 
-  (cj/query (env :database-url) ["DELETE\n
+  (cj/query db ["DELETE\n
                  FROM report\n
                  WHERE organization = ?" org-name]
             )
@@ -155,7 +155,7 @@
 
   (let [_date (clt/to-sql-date (clt/to-string input))]
 
-    (cj/query (env :database-url) ["DELETE\n
+    (cj/query db ["DELETE\n
                    FROM report\n
                    WHERE date = ?" _date])
 
@@ -164,7 +164,7 @@
 
 (defn delete-full-report []
 
-  (cj/query (env :database-url) ["DELETE\n
+  (cj/query db ["DELETE\n
                  FROM report"]
             )
 

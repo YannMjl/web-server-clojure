@@ -36,8 +36,6 @@
 
   :hooks [environ.leiningen.hooks]
 
-  :heroku {:app_name "web-server-reports"}
-
   :profiles {:dev {:source-paths ["dev"]
                    :dependencies [[org.clojure/java.classpath "0.2.3"]
                                   [org.clojure/tools.namespace "0.3.0-alpha4"]]

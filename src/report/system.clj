@@ -20,7 +20,7 @@
 (defn system[route port]
   "Returns a new instance of the whole application."
 
-  {:db (env :database-url)
+  {:db (env :database_url)
 
    :handler {:status  200
              :headers {"Content-Type" "application/json"
