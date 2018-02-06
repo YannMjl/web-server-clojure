@@ -37,6 +37,10 @@
 
   :hooks [environ.leiningen.hooks]
 
+  :ring {:handler report.core/app-handler
+         :auto-reload? true
+         :auto-refresh? false}
+
   :profiles {:dev {:source-paths ["dev"]
                    :dependencies [[org.clojure/java.classpath "0.2.3"]
                                   [org.clojure/tools.namespace "0.3.0-alpha4"]]
