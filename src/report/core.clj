@@ -223,12 +223,12 @@
 (defn -main [& [port]]
   (let [port (Integer. (or port (env :port) 3000))]
 
-    (jetty/run-jetty (wrap-cors (wrap-multipart-params myroutes))
+    (jetty/run-jetty (wrap-cors (wrap-multipart-params myroutes) #".*")
                      {:port port
                       :join? false
-                      :access-control-allow-methods [:get :post :delete :options]
-                      :access-control-allow-headers ["Accept, Content-Type"]
-                      :access-control-allow-origin [#"http://localhost:4200"]
+                      ;:access-control-allow-methods [:get :post :delete :options]
+                      ;:access-control-allow-headers ["Accept, Content-Type"]
+                      ;:access-control-allow-origin [#"http://localhost:4200"]
                       }
                      )
 
