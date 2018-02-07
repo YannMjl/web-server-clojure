@@ -7,6 +7,8 @@
   (:require [clojure.java.io]
             [clojure.data.csv]
             [cheshire.core :refer :all]
+            [compojure.core :refer :all]
+            [compojure.route :as route]
 
             [clojure.java.jdbc :as cj]
             [clj-time.coerce :as clt]
@@ -176,7 +178,7 @@
 (defn app-handler [request]
   {:status  200
    :headers {"Content-Type"                     "application/json"
-             "Access-Control-Allow-Origin"      ".*"
+             "Access-Control-Allow-Origin"      "*"
              "Access-Control-Allow-Credentials" "false"
              "Access-Control-Allow-Methods"     "POST, GET, DELETE, OPTIONS"
              "Access-Control-Allow-Headers"     "Accept, Content-Type"}
@@ -194,6 +196,8 @@
            (DELETE "/delete-date/:input" [input] (delete-by-date input))
            (DELETE "/delete-name/:input" [input] (delete-by-name input))
            (DELETE "/delete-all-record" [] (delete-full-report))
+
+           (route/not-found "<h1>Page not found</h1>")
 
            (POST "/file" {params :params
                           :as    req
@@ -219,12 +223,13 @@
 (defn -main [& [port]]
   (let [port (Integer. (or port (env :port) 3000))]
 
-    (jetty/run-jetty (wrap-cors (wrap-multipart-params myroutes)
-                                :access-control-allow-methods [:get :post :delete :options]
-                                ;:access-control-allow-headers ["Accept, Content-Type"]
-                                :access-control-allow-origin [#"http://localhost:4200"]
-                                )
-                     {:port port :join? false}
+    (jetty/run-jetty (wrap-cors (wrap-multipart-params myroutes))
+                     {:port port
+                      :join? false
+                      :access-control-allow-methods [:get :post :delete :options]
+                      :access-control-allow-headers ["Accept, Content-Type"]
+                      :access-control-allow-origin [#"http://localhost:4200"]
+                      }
                      )
 
     )
