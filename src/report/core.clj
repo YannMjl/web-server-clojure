@@ -225,7 +225,7 @@
 
     (jetty/run-jetty (wrap-cors (wrap-multipart-params myroutes)
                                 :access-control-allow-methods [:get :post :delete :options]
-                                :access-control-allow-origin [#".*"]
+                                :access-control-allow-origin [#"http://localhost:4200"]
                                 )
                      {:port port :join? false}
                      )
