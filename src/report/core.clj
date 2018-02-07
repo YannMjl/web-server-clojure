@@ -197,7 +197,7 @@
            (DELETE "/delete-name/:input" [input] (delete-by-name input))
            (DELETE "/delete-all-record" [] (delete-full-report))
 
-           (route/not-found "<h1>Page not found</h1>")
+           ;(route/not-found "<h1>Page not found</h1>")
 
            (POST "/file" {params :params
                           :as    req
