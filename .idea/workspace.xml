@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="100e422a-0e0f-456c-8c31-242cb3a53754" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/project.clj" afterPath="$PROJECT_DIR$/project.clj" />
       <change beforePath="$PROJECT_DIR$/src/report/core.clj" afterPath="$PROJECT_DIR$/src/report/core.clj" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,7 +14,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="project.clj" pinned="false" current-in-tab="true">
+      <file leaf-file-name="project.clj" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/project.clj">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="330">
@@ -25,11 +24,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="core.clj" pinned="false" current-in-tab="false">
+      <file leaf-file-name="core.clj" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/report/core.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="30" lean-forward="false" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
+            <state relative-caret-position="-283">
+              <caret line="121" column="21" lean-forward="false" selection-start-line="121" selection-start-column="21" selection-end-line="121" selection-end-column="21" />
               <folding />
             </state>
           </provider>
@@ -48,8 +47,8 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/report/core.clj" />
         <option value="$PROJECT_DIR$/project.clj" />
+        <option value="$PROJECT_DIR$/src/report/core.clj" />
       </list>
     </option>
   </component>
@@ -107,7 +106,7 @@
     <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/project.clj" />
   </component>
-  <component name="ReplState" timestamp="1518123495659">{:repl-history {:ide [], :local [{:command &quot;(+ 4 4)&quot;, :offset 7, :ns &quot;user&quot;} {:command &quot;(doc println)&quot;, :offset 13, :ns &quot;user&quot;} {:command &quot;(doc print)&quot;, :offset 11, :ns &quot;user&quot;} {:command &quot;(print \&quot;hi\&quot;)&quot;, :offset 12, :ns &quot;user&quot;} {:command &quot;(println \&quot;hi\&quot;)&quot;, :offset 14, :ns &quot;hi&quot;} {:command &quot;(require 'report.core)&quot;, :offset 22, :ns &quot;user&quot;} {:command &quot;(report.core/-main)&quot;, :offset 19, :ns &quot;user&quot;} {:command &quot;(appl str \&quot;hi\&quot;)&quot;, :offset 15, :ns &quot;user&quot;} {:command &quot;(\&quot;hi\&quot;)&quot;, :offset 6, :ns &quot;user&quot;} {:command &quot;(+ 2 5)&quot;, :offset 7, :ns &quot;user&quot;} {:command &quot;(apply str \&quot;hi\&quot;)&quot;, :offset 16, :ns &quot;user&quot;}], :remote []}}</component>
+  <component name="ReplState" timestamp="1518124619505">{:repl-history {:ide [], :local [{:command &quot;(+ 4 4)&quot;, :offset 7, :ns &quot;user&quot;} {:command &quot;(doc println)&quot;, :offset 13, :ns &quot;user&quot;} {:command &quot;(doc print)&quot;, :offset 11, :ns &quot;user&quot;} {:command &quot;(print \&quot;hi\&quot;)&quot;, :offset 12, :ns &quot;user&quot;} {:command &quot;(println \&quot;hi\&quot;)&quot;, :offset 14, :ns &quot;hi&quot;} {:command &quot;(require 'report.core)&quot;, :offset 22, :ns &quot;user&quot;} {:command &quot;(report.core/-main)&quot;, :offset 19, :ns &quot;user&quot;} {:command &quot;(appl str \&quot;hi\&quot;)&quot;, :offset 15, :ns &quot;user&quot;} {:command &quot;(\&quot;hi\&quot;)&quot;, :offset 6, :ns &quot;user&quot;} {:command &quot;(+ 2 5)&quot;, :offset 7, :ns &quot;user&quot;} {:command &quot;(apply str \&quot;hi\&quot;)&quot;, :offset 16, :ns &quot;user&quot;}], :remote []}}</component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -279,18 +278,18 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/report/core.clj">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="30" lean-forward="false" selection-start-line="7" selection-start-column="30" selection-end-line="7" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/project.clj">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="22" column="34" lean-forward="false" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/report/core.clj">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-283">
+          <caret line="121" column="21" lean-forward="false" selection-start-line="121" selection-start-column="21" selection-end-line="121" selection-end-column="21" />
           <folding />
         </state>
       </provider>

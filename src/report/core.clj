@@ -117,27 +117,33 @@
 
 (defn get-full-report []
   (cj/query db-url ["SELECT DISTINCT ON (organization)\n
-                  organization, size, date\n
-                  FROM cloudrepo_report\nORDER BY organization"])
+                     organization, size, date\n
+                     FROM cloudrepo_report\n
+                     ORDER BY organization"])
   )
 
 (defn get-full-report-of-date []
   (cj/query db-url ["SELECT DISTINCT ON (date)\n
-                  organization, size, date\n
-                  FROM cloudrepo_report\nORDER BY date DESC"])
+                     organization, size, date\n
+                     FROM cloudrepo_report\n
+                     ORDER BY date DESC"])
   )
 
 (defn view-by-organization [org-name]
 
-  (cj/query db-url ["SELECT organization, size, date\n
-                 FROM cloudrepo_report\n
-                 WHERE organization = ?" org-name]))
+  (cj/query db-url ["SELECT
+                    \"organization\", \"size\", \"date\"
+                    FROM \"cloudrepo_report\"
+                    WHERE (\"organization\" = ?) ORDER BY \"date\" DESC" org-name]))
 
 (defn view-by-date [input]
 
   (let [_date (clt/to-sql-date (clt/to-string input))]
 
-    (cj/query db-url ["SELECT organization, size, date FROM cloudrepo_report WHERE date = ?" _date])
+    (cj/query db-url ["SELECT
+                      \"organization\", \"size\", \"date\"
+                      FROM \"cloudrepo_report\"
+                      WHERE (\"date\" = ?) ORDER BY \"size\" DESC" _date])
 
     )
   )
@@ -155,17 +161,17 @@
 
   (let [_date (clt/to-sql-date (clt/to-string input))]
 
-    (cj/query db-url ["DELETE\n
-                   FROM cloudrepo_report\n
-                   WHERE date = ?" _date])
+    (cj/query db-url ["DELETE FROM
+                      \"cloudrepo_report\"
+                      WHERE (\"date\" = ?) RETURNING *" _date])
 
     )
   )
 
 (defn delete-full-report []
 
-  (cj/query db-url ["DELETE\n
-                 FROM cloudrepo_report "]
+  (cj/query db-url ["DELETE FROM
+                    \"cloudrepo_report\" RETURNING *"]
             )
 
   )
