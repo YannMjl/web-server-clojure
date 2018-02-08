@@ -6,6 +6,7 @@
 
   (:require [clojure.java.io]
             [clojure.data.csv]
+    ;[sqlingvo.core :refer :all]
             [cheshire.core :refer :all]
             [compojure.core :refer :all]
             [compojure.route :as route]
@@ -144,9 +145,9 @@
 
 (defn delete-by-name [org-name]
 
-  (cj/query db-url ["DELETE\n
-                 FROM cloudrepo_report\n
-                 WHERE organization = ?" org-name]
+  (cj/query db-url ["DELETE FROM
+                     \"cloudrepo_report\"
+                     WHERE (\"organization\" = ?) RETURNING *" org-name]
             )
 
   )
@@ -212,17 +213,17 @@
 
            (GET "/delete-date/:input" [input]
              (delete-by-date input)
-             {:status 200}
+
              )
 
            (GET "/delete-name/:input" [input]
              (delete-by-name input)
-             {:status 200}
+
              )
 
            (GET "/delete-all-record" []
              (delete-full-report)
-             {:status 200}
+
              )
 
            (POST "/file" {params :params
