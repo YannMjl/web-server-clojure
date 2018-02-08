@@ -92,7 +92,7 @@
         _size (:size report)
         _date (clt/to-sql-date (clt/to-string date))]
 
-    (cj/insert! db :cloudrepo_report {:organization _name
+    (cj/insert! db-url :cloudrepo_report {:organization _name
                                       :size         _size
                                       :date         _date})
     )
@@ -116,20 +116,20 @@
 ;-----------------------------------------------------------------------------------------*
 
 (defn get-full-report []
-  (cj/query (env :database-url) ["SELECT DISTINCT ON (organization)\n
+  (cj/query db-url ["SELECT DISTINCT ON (organization)\n
                   organization, size, date\n
                   FROM cloudrepo_report\nORDER BY organization"])
   )
 
 (defn get-full-report-of-date []
-  (cj/query db ["SELECT DISTINCT ON (date)\n
+  (cj/query db-url ["SELECT DISTINCT ON (date)\n
                   organization, size, date\n
                   FROM cloudrepo_report\nORDER BY date DESC"])
   )
 
 (defn view-by-organization [org-name]
 
-  (cj/query db ["SELECT organization, size, date\n
+  (cj/query db-url ["SELECT organization, size, date\n
                  FROM cloudrepo_report\n
                  WHERE organization = ?" org-name]))
 
@@ -137,14 +137,14 @@
 
   (let [_date (clt/to-sql-date (clt/to-string input))]
 
-    (cj/query db ["SELECT organization, size, date FROM cloudrepo_report WHERE date = ?" _date])
+    (cj/query db-url ["SELECT organization, size, date FROM cloudrepo_report WHERE date = ?" _date])
 
     )
   )
 
 (defn delete-by-name [org-name]
 
-  (cj/query db ["DELETE\n
+  (cj/query db-url ["DELETE\n
                  FROM cloudrepo_report\n
                  WHERE organization = ?" org-name]
             )
@@ -155,7 +155,7 @@
 
   (let [_date (clt/to-sql-date (clt/to-string input))]
 
-    (cj/query db ["DELETE\n
+    (cj/query db-url ["DELETE\n
                    FROM cloudrepo_report\n
                    WHERE date = ?" _date])
 
@@ -164,7 +164,7 @@
 
 (defn delete-full-report []
 
-  (cj/query db ["DELETE\n
+  (cj/query db-url ["DELETE\n
                  FROM cloudrepo_report "]
             )
 
@@ -186,18 +186,44 @@
    :body    (generate-string request)}
   )
 
-(defroutes myroutes (GET "/" [] (apply str "Hello Welcome! This is a report page of CloudRepo users"))
+(defroutes myroutes (GET "/" []
+                      (apply str "<h1>Hello Welcome! This is a report page of CloudRepo users</h1>")
+                      )
 
-           (GET "/report" [] (generate-string (get-full-report)))
-           (GET "/date" [] (generate-string (get-full-report-of-date)))
-           (GET "/date/:input" [input] (generate-string (view-by-date input)))
-           (GET "/name/:input" [input] (generate-string (view-by-organization input)))
+           (GET "/report" []
+             (generate-string (get-full-report))
 
-           (DELETE "/delete-date/:input" [input] (delete-by-date input))
-           (DELETE "/delete-name/:input" [input] (delete-by-name input))
-           (DELETE "/delete-all-record" [] (delete-full-report))
+             )
 
-           ;(route/not-found "<h1>Page not found</h1>")
+           (GET "/date" []
+             (generate-string (get-full-report-of-date))
+
+             )
+
+           (GET "/date/:input" [input]
+             (generate-string (view-by-date input))
+
+             )
+
+           (GET "/name/:input" [input]
+             (generate-string (view-by-organization input))
+
+             )
+
+           (DELETE "/delete-date/:input" [input]
+             (delete-by-date input)
+
+             )
+
+           (DELETE "/delete-name/:input" [input]
+             (delete-by-name input)
+
+             )
+
+           (DELETE "/delete-all-record" []
+             (delete-full-report)
+
+             )
 
            (POST "/file" {params :params
                           :as    req
@@ -209,11 +235,15 @@
                        date (clt/to-string dateparam)
                        report (file-report file)]
 
-                   (println (upload-report-to-database report date))
+                    (upload-report-to-database report date)
                    )
 
                  )
+
+           (route/not-found "<h1>Page not found or does not exit</h1>")
+
            )
+
 
 ;-----------------------------------------------------------------------------------------*
 ;this section content the main function that start the server                             *
@@ -225,6 +255,7 @@
 
     (jetty/run-jetty (wrap-cors (wrap-multipart-params myroutes)
                                 :access-control-allow-methods [:get :post :delete :options]
+                                :access-control-allow-headers ["Content-Type"]
                                 :access-control-allow-origin [#"http://localhost:4200"]
                                 )
                      {:port port :join? false}
