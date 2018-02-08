@@ -212,17 +212,17 @@
 
            (GET "/delete-date/:input" [input]
              (delete-by-date input)
-
+             (apply str "<h2>records deleted successfully</h2>")
              )
 
            (GET "/delete-name/:input" [input]
              (delete-by-name input)
-
+             (apply str "<h2>records deleted successfully</h2>")
              )
 
            (GET "/delete-all-record" []
              (delete-full-report)
-
+             (apply str "<h2>All records deleted successfully</h2>")
              )
 
            (POST "/file" {params :params
