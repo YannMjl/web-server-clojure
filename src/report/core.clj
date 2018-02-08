@@ -210,19 +210,20 @@
 
              )
 
-           (DELETE "/delete-date/:input" [input]
+           (GET "/delete-date/:input" [input]
              (delete-by-date input)
+             (apply str input + "<h2> record was deleted from report database</h2>")
 
              )
 
-           (DELETE "/delete-name/:input" [input]
+           (GET "/delete-name/:input" [input]
              (delete-by-name input)
-
+             (apply str input + "<h2> record was deleted from report database</h2>")
              )
 
-           (DELETE "/delete-all-record" []
+           (GET "/delete-all-record" []
              (delete-full-report)
-
+             (apply str "<h2>all records were deleted from database</h2>")
              )
 
            (POST "/file" {params :params
