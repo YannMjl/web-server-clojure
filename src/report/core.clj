@@ -217,7 +217,7 @@
              )
 
            (GET "/delete-date/:input" [input]
-             (delete-by-date input)
+             (generate-string (delete-by-date input))
 
              )
 
@@ -227,7 +227,7 @@
              )
 
            (GET "/delete-all-record" []
-             (delete-full-report)
+             (generate-string (delete-full-report))
 
              )
 
