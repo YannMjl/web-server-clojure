@@ -21,7 +21,6 @@
                  [clj-http "3.7.0"]
                  [clj-time "0.14.2"]
                  [environ "1.1.0"]
-                 ;[sqlingvo "0.9.16"]
 
                  [compojure "1.6.0"]
                  [cheshire "5.8.0"]

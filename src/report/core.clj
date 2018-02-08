@@ -6,7 +6,6 @@
 
   (:require [clojure.java.io]
             [clojure.data.csv]
-    ;[sqlingvo.core :refer :all]
             [cheshire.core :refer :all]
             [compojure.core :refer :all]
             [compojure.route :as route]
@@ -217,7 +216,7 @@
              )
 
            (GET "/delete-name/:input" [input]
-             (delete-by-name input)
+             (generate-string (delete-by-name input))
 
              )
 
