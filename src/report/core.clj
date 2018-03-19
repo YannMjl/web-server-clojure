@@ -262,7 +262,7 @@
     (jetty/run-jetty (wrap-cors (wrap-multipart-params myroutes)
                                 :access-control-allow-methods [:get :post :delete :options]
                                 :access-control-allow-headers ["Content-Type"]
-                                :access-control-allow-origin [#"https://yannmjl.github.io"]
+                                :access-control-allow-origin [#"https://yannmjl.github.io" "http://localhost:4200"]
                                 )
                      {:port port :join? false}
                      )
