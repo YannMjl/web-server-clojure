@@ -27,8 +27,8 @@
       <file leaf-file-name="core.clj" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/report/core.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="785">
-              <caret line="270" column="0" lean-forward="true" selection-start-line="270" selection-start-column="0" selection-end-line="270" selection-end-column="0" />
+            <state relative-caret-position="575">
+              <caret line="256" column="77" lean-forward="true" selection-start-line="256" selection-start-column="77" selection-end-line="256" selection-end-column="77" />
               <folding />
             </state>
           </provider>
@@ -293,8 +293,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/report/core.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="785">
-          <caret line="270" column="0" lean-forward="true" selection-start-line="270" selection-start-column="0" selection-end-line="270" selection-end-column="0" />
+        <state relative-caret-position="575">
+          <caret line="256" column="77" lean-forward="true" selection-start-line="256" selection-start-column="77" selection-end-line="256" selection-end-column="77" />
           <folding />
         </state>
       </provider>
