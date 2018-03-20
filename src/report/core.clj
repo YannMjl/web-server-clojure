@@ -136,6 +136,13 @@
                     FROM \"cloudrepo_report\"
                     WHERE (\"organization\" = ?) ORDER BY \"date\" DESC" org-name]))
 
+(defn view-by-organization-chart [org-name]
+
+  (cj/query db-url ["SELECT
+                    \"size\", \"date\"
+                    FROM \"cloudrepo_report\"
+                    WHERE (\"organization\" = ?) ORDER BY \"date\" DESC" org-name]))
+
 (defn view-by-date [input]
 
   (let [_date (clt/to-sql-date (clt/to-string input))]
@@ -213,6 +220,11 @@
 
            (GET "/name/:input" [input]
              (generate-string (view-by-organization input))
+
+             )
+
+           (GET "/org/:input" [input]
+             (generate-string (view-by-organization-chart input))
 
              )
 
