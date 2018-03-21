@@ -155,6 +155,18 @@
     )
   )
 
+(defn view-by-date-chart [input]
+
+  (let [_date (clt/to-sql-date (clt/to-string input))]
+
+    (cj/query db-url ["SELECT
+                      \"organization\", \"size\"
+                      FROM \"cloudrepo_report\"
+                      WHERE (\"date\" = ?) ORDER BY \"size\" DESC" _date])
+
+    )
+  )
+
 (defn delete-by-name [org-name]
 
   (cj/query db-url ["DELETE FROM
@@ -215,6 +227,11 @@
 
            (GET "/date/:input" [input]
              (generate-string (view-by-date input))
+
+             )
+
+           (GET "/date-chart/:input" [input]
+             (generate-string (view-by-date-chart input))
 
              )
 
