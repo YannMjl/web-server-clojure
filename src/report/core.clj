@@ -141,7 +141,7 @@
   (cj/query db-url ["SELECT
                     \"size\", \"date\"
                     FROM \"cloudrepo_report\"
-                    WHERE (\"organization\" = ?) ORDER BY \"date\" DESC" org-name]))
+                    WHERE (\"organization\" = ?) ORDER BY \"date\" ASC" org-name]))
 
 (defn view-by-date [input]
 
@@ -162,7 +162,7 @@
     (cj/query db-url ["SELECT
                       \"organization\", \"size\"
                       FROM \"cloudrepo_report\"
-                      WHERE (\"date\" = ?) ORDER BY \"size\" DESC" _date])
+                      WHERE (\"date\" = ?) ORDER BY \"organization\" ASC" _date])
 
     )
   )
