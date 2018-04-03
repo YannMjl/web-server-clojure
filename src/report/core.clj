@@ -16,6 +16,7 @@
 
             [ring.adapter.jetty :as jetty]
             [ring.util.response :refer [response]]
+            [ring.util.hpp-status :as status]
             [ring.middleware.cors :refer [wrap-cors]]
             [ring.middleware.params :refer [wrap-params]]
             [ring.middleware.json :refer [wrap-json-response]]
@@ -87,7 +88,7 @@
 ;                                                                                         *
 ;-----------------------------------------------------------------------------------------*
 
-(defn get-name-and-size [report date]
+(defn insert-report-to-database [report date]
   (let [_name (:name report)
         _size (:size report)
         _date (clt/to-sql-date (clt/to-string date))]
@@ -99,7 +100,7 @@
   )
 
 (defn upload-report-to-database [report date]
-  (map #(get-name-and-size % date) report)
+  (map #(insert-report-to-database % date) report)
   )
 
 (defn upload-file [file]
@@ -270,7 +271,7 @@
                        date (clt/to-string dateparam)
                        report (file-report file)]
 
-                    (upload-report-to-database report date)
+                    (generate-string (upload-report-to-database report date))
                    )
 
                  )
@@ -286,7 +287,7 @@
 ;-----------------------------------------------------------------------------------------*
 
 (defn -main [& [port]]
-  (let [port (Integer. (or port (env :port) 3000))]
+  (let [port (Integer. (or port (env :port) 5000))]
 
     (jetty/run-jetty (wrap-cors (wrap-multipart-params myroutes)
                                 :access-control-allow-methods [:get :post :delete :options]
