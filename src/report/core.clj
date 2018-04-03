@@ -16,7 +16,6 @@
 
             [ring.adapter.jetty :as jetty]
             [ring.util.response :refer [response]]
-            [ring.util.hpp-status :as status]
             [ring.middleware.cors :refer [wrap-cors]]
             [ring.middleware.params :refer [wrap-params]]
             [ring.middleware.json :refer [wrap-json-response]]
