@@ -326,7 +326,7 @@
 (defn -main [& [port]]
   (let [port (Integer. (or port (env :port) 5000))]
 
-    (jetty/run-jetty (wrap-cors (wrap-multipart-params app)
+    (jetty/run-jetty (wrap-cors (wrap-multipart-params myroutes)
                                 :access-control-allow-methods [:get :post :delete :options]
                                 :access-control-allow-headers ["Content-Type"]
                                 :access-control-allow-origin [#"https://yannmjl.github.io" #"http://localhost:4200"]
