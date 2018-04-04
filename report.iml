@@ -14,6 +14,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Leiningen: buddy/buddy-auth:2.1.0" level="project" />
+    <orderEntry type="library" name="Leiningen: buddy/buddy-core:1.4.0" level="project" />
+    <orderEntry type="library" name="Leiningen: buddy/buddy-sign:2.2.0" level="project" />
     <orderEntry type="library" name="Leiningen: cheshire:5.8.0" level="project" />
     <orderEntry type="library" name="Leiningen: clj-http:3.7.0" level="project" />
     <orderEntry type="library" name="Leiningen: clj-stacktrace:0.2.8" level="project" />
@@ -37,6 +40,7 @@
     <orderEntry type="library" name="Leiningen: crypto-random:1.2.0" level="project" />
     <orderEntry type="library" name="Leiningen: csv-map:0.1.2" level="project" />
     <orderEntry type="library" name="Leiningen: environ:1.1.0" level="project" />
+    <orderEntry type="library" name="Leiningen: funcool/cuerdas:2.0.3" level="project" />
     <orderEntry type="library" name="Leiningen: hiccup:1.0.5" level="project" />
     <orderEntry type="library" name="Leiningen: instaparse:1.4.0" level="project" />
     <orderEntry type="library" name="Leiningen: javax.servlet/javax.servlet-api:3.1.0" level="project" />
@@ -49,8 +53,11 @@
     <orderEntry type="library" name="Leiningen: org.apache.httpcomponents/httpcore-nio:4.4.6" level="project" />
     <orderEntry type="library" name="Leiningen: org.apache.httpcomponents/httpcore:4.4.6" level="project" />
     <orderEntry type="library" name="Leiningen: org.apache.httpcomponents/httpmime:4.5.3" level="project" />
-    <orderEntry type="library" name="Leiningen: org.clojure/clojure:1.9.0" level="project" />
+    <orderEntry type="library" name="Leiningen: org.bouncycastle/bcpkix-jdk15on:1.58" level="project" />
+    <orderEntry type="library" name="Leiningen: org.bouncycastle/bcprov-jdk15on:1.58" level="project" />
+    <orderEntry type="library" name="Leiningen: org.clojure/clojure:1.10.0-alpha4" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/core.specs.alpha:0.1.24" level="project" />
+    <orderEntry type="library" name="Leiningen: org.clojure/data.codec:0.1.0" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/data.csv:0.1.4" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/java.classpath:0.2.3" level="project" />
     <orderEntry type="library" name="Leiningen: org.clojure/java.jdbc:0.7.4" level="project" />
@@ -67,7 +74,9 @@
     <orderEntry type="library" name="Leiningen: potemkin:0.4.3" level="project" />
     <orderEntry type="library" name="Leiningen: reloaded.repl:0.2.4" level="project" />
     <orderEntry type="library" name="Leiningen: riddley:0.1.12" level="project" />
+    <orderEntry type="library" name="Leiningen: ring-basic-authentication:1.0.5" level="project" />
     <orderEntry type="library" name="Leiningen: ring-cors:0.1.11" level="project" />
+    <orderEntry type="library" name="Leiningen: ring-mock:0.1.5" level="project" />
     <orderEntry type="library" name="Leiningen: ring/ring-codec:1.0.1" level="project" />
     <orderEntry type="library" name="Leiningen: ring/ring-core:1.6.3" level="project" />
     <orderEntry type="library" name="Leiningen: ring/ring-devel:1.6.3" level="project" />

@@ -4,7 +4,7 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
 
-  :dependencies [[org.clojure/clojure "1.9.0"]
+  :dependencies [[org.clojure/clojure "1.10.0-alpha4"]
                  [org.postgresql/postgresql "42.1.4.jre7"]
                  [org.clojure/java.jdbc "0.7.4"]
                  [org.clojure/data.csv "0.1.4"]
@@ -15,6 +15,7 @@
                  [ring/ring-mock "0.3.2"]
                  [ring/ring-json "0.5.0-beta1"]
                  [ring/ring-jetty-adapter "1.6.3"]
+                 [ring-basic-authentication "1.0.5"]
 
                  [csv-map "0.1.2"]
                  [clj-x256 "0.0.1"]
@@ -25,6 +26,7 @@
                  [compojure "1.6.0"]
                  [cheshire "5.8.0"]
                  [reloaded.repl "0.2.4"]
+                 [buddy/buddy-auth "2.1.0"]
                  [com.stuartsierra/component "0.3.2"]
                  [javax.servlet/servlet-api "3.0-alpha-1"]]
 
@@ -42,7 +44,9 @@
          :auto-refresh? false}
 
   :profiles {:dev {:source-paths ["dev"]
-                   :dependencies [[org.clojure/java.classpath "0.2.3"]
+                   :dependencies [[ring-mock "0.1.5"]
+                                  [org.clojure/java.classpath "0.2.3"]
+                                  [javax.servlet/servlet-api "3.0-alpha-1"]
                                   [org.clojure/tools.namespace "0.3.0-alpha4"]]
                    }
              :uberjar {:aot

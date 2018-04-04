@@ -1,7 +1,8 @@
 (ns report.core
 
-  (:use [clojure.java.io]
-        [clojure.set]
+  (:use [clojure.set]
+        [clojure.java.io]
+        [ring.middleware.json]
         [compojure.core :refer :all])
 
   (:require [clojure.java.io]
@@ -14,16 +15,23 @@
             [clj-time.coerce :as clt]
             [environ.core :refer [env]]
 
+    ;[buddy.hashers :as hashers]
+    ;       [buddy.auth.accessrules :refer [restrict]]
+    ;       [buddy.auth.backends.session :refer [session-backend]]
+    ;       [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
+
             [ring.adapter.jetty :as jetty]
             [ring.util.response :refer [response]]
             [ring.middleware.cors :refer [wrap-cors]]
             [ring.middleware.params :refer [wrap-params]]
+            [ring.middleware.session :refer [wrap-session]]
             [ring.middleware.json :refer [wrap-json-response]]
-            [ring.middleware.multipart-params :refer [wrap-multipart-params]])
+            [ring.middleware.multipart-params :refer [wrap-multipart-params]]
+            [ring.middleware.basic-authentication :refer [wrap-basic-authentication]])
 
   )
 
-;-----------------------------------------------------------------------------------------*
+;----------------------------------------------------------------------------------------------------------------------*
 
 ;convert string to integer
 (defn to-int [s]
@@ -39,10 +47,10 @@
 (def db (System/getenv "DATABASE_URL"))
 (def db-url (env :database-url))
 
-;-----------------------------------------------------------------------------------------*
-;this section content functions that do multiple operation on the csv file in order to    *
-;get its content and generate a report                                                    *
-;-----------------------------------------------------------------------------------------*
+;----------------------------------------------------------------------------------------------------------------------*
+;this section content functions that do multiple operation on the csv file in order to                                 *
+;get its content and generate a report                                                                                 *
+;----------------------------------------------------------------------------------------------------------------------*
 
 (defn read-file [file]
   (clojure.string/split-lines (slurp file)))
@@ -82,10 +90,10 @@
     (get-lines-report file-line))
   )
 
-;-----------------------------------------------------------------------------------------*
-;this section content functions that connect and upload a report into the database        *
-;                                                                                         *
-;-----------------------------------------------------------------------------------------*
+;----------------------------------------------------------------------------------------------------------------------*
+;this section content functions that connect and upload a report into the database                                     *
+;                                                                                                                      *
+;----------------------------------------------------------------------------------------------------------------------*
 
 (defn insert-report-to-database [report date]
   (let [_name (:name report)
@@ -110,10 +118,10 @@
     )
   )
 
-;-----------------------------------------------------------------------------------------*
-;this section content queries functions that read the report data stored in the postgres  *
-;database which returns a sub report by organization name or the data uploaded            *
-;-----------------------------------------------------------------------------------------*
+;----------------------------------------------------------------------------------------------------------------------*
+;this section content queries functions that read the report data stored in the postgres                               *
+;database which returns a sub report by organization name or the data uploaded                                         *
+;----------------------------------------------------------------------------------------------------------------------*
 
 (defn get-full-report []
   (cj/query db-url ["SELECT DISTINCT ON (organization)\n
@@ -195,10 +203,10 @@
 
   )
 
-;-----------------------------------------------------------------------------------------*
-;this section content functions for routes and route handler                              *
-;REST API configurations are also set here                                                *
-;-----------------------------------------------------------------------------------------*
+;----------------------------------------------------------------------------------------------------------------------*
+;this section content functions for routes and route handler                                                           *
+;REST API configurations are also set here                                                                             *
+;----------------------------------------------------------------------------------------------------------------------*
 
 (defn app-handler [request]
   {:status  200
@@ -280,15 +288,45 @@
            )
 
 
-;-----------------------------------------------------------------------------------------*
-;this section content the main function that start the server                             *
-;on local host port 5000                                                                  *
-;-----------------------------------------------------------------------------------------*
+;----------------------------------------------------------------------------------------------------------------------*
+;Behold, our middleware! Note that it's common to prefix our middleware name                                           *
+;with "wrap-", since it surrounds any routes an other middleware "inside"                                              *
+;                                                                                                                      *
+; We can attach our middleware directly to the main application handler. All                                           *
+; requests/responses will be "filtered" through our logging handler.                                                   *
+;----------------------------------------------------------------------------------------------------------------------*
+
+(defn wra-log-request [handler]
+  (fn [req]             ; return handler function
+    (println req)       ; perform logging
+    (handler req))      ; pass the request through to the inner handler
+  )
+
+(defn authenticated? [username password]
+  (and (= username "admin")
+       (= password "pass")
+       {:user username :password password})
+  )
+
+(def app
+  (-> myroutes
+      wra-log-request
+      wrap-json-response
+      wrap-json-body
+      (wrap-basic-authentication authenticated?))
+  ; With this middleware in place, we are all set to parse JSON request bodies and
+  ; serve up JSON responses
+  )
+
+;----------------------------------------------------------------------------------------------------------------------*
+;this section content the main function that start the server                                                          *
+;on local host port 5000                                                                                               *
+;----------------------------------------------------------------------------------------------------------------------*
 
 (defn -main [& [port]]
   (let [port (Integer. (or port (env :port) 5000))]
 
-    (jetty/run-jetty (wrap-cors (wrap-multipart-params myroutes)
+    (jetty/run-jetty (wrap-cors (wrap-multipart-params app)
                                 :access-control-allow-methods [:get :post :delete :options]
                                 :access-control-allow-headers ["Content-Type"]
                                 :access-control-allow-origin [#"https://yannmjl.github.io" #"http://localhost:4200"]
@@ -300,4 +338,4 @@
 
   )
 
-;-----------------------------------------------------------------------------------------*
+;----------------------------------------------------------------------------------------------------------------------*
