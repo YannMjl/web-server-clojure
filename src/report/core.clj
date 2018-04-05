@@ -296,6 +296,8 @@
 ; requests/responses will be "filtered" through our logging handler.                                                   *
 ;----------------------------------------------------------------------------------------------------------------------*
 
+
+
 (defn wra-log-request [handler]
   (fn [req]             ; return handler function
     (println req)       ; perform logging
@@ -312,8 +314,9 @@
   (-> myroutes
       wra-log-request
       wrap-json-response
-      wrap-json-body
-      (wrap-basic-authentication authenticated?))
+      (wrap-basic-authentication authenticated?)
+      ;(wrap-session)
+      )
   ; With this middleware in place, we are all set to parse JSON request bodies and
   ; serve up JSON responses
   )
@@ -326,7 +329,7 @@
 (defn -main [& [port]]
   (let [port (Integer. (or port (env :port) 5000))]
 
-    (jetty/run-jetty (wrap-cors (wrap-multipart-params myroutes)
+    (jetty/run-jetty (wrap-cors (wrap-multipart-params app)
                                 :access-control-allow-methods [:get :post :delete :options]
                                 :access-control-allow-headers ["Content-Type"]
                                 :access-control-allow-origin [#"https://yannmjl.github.io" #"http://localhost:4200"]
