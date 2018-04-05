@@ -283,6 +283,14 @@
 
                  )
 
+           (POST "/login" {params :params
+                          :as    req
+                          }
+
+             (println-str req)
+
+             )
+
            (route/not-found "<h1>Page not found or does not exit</h1>")
 
            )
