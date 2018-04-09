@@ -216,7 +216,7 @@
        {:user username :password password})
   )
 
-(defn isAuthenticated? [username password]
+(defn isAuthenticated [username password]
   (and (= username "admin")
        (= password "pass")
        {:token "#You_Are_In!"})
@@ -253,7 +253,7 @@
                    password (get params "password")
                    ]
 
-               (generate-string (isAuthenticated? username password))
+               (generate-string (isAuthenticated username password))
                )
 
              )
@@ -352,7 +352,7 @@
   (-> protected-routes
       wrap-log-request
       wrap-json-response
-      (wrap-token-authentication isAuthenticated?)
+      (wrap-token-authentication authenticated?)
       )
   ; With this middleware in place, we are all set to parse JSON request bodies and
   ; serve up JSON responses
