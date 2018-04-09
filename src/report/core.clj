@@ -45,8 +45,8 @@
   )
 
 ;connect to the database
-(def db-url (System/getenv "DATABASE_URL"))
-;(def db-url (env :database-url))
+;(def db-url (System/getenv "DATABASE_URL"))
+(def db-url (env :database-url))
 
 ;----------------------------------------------------------------------------------------------------------------------*
 ;this section content functions that do multiple operation on the csv file in order to                                 *
@@ -352,7 +352,7 @@
   )
 (def log-route
   (-> login-route
-      ;wrap-log-request
+      wrap-log-request
       wrap-json-response))
 
 (def secured-routes
