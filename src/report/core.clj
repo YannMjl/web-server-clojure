@@ -358,9 +358,8 @@
   ; serve up JSON responses
   )
 
-(defroutes main-routes
-  (ANY "*" [] log-route)
-  (ANY "*" [] secured-routes)
+(def main-routes
+  (routes log-route secured-routes)
   )
 
 ;----------------------------------------------------------------------------------------------------------------------*
