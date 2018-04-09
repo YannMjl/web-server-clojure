@@ -17,7 +17,7 @@
   (let [port (Integer. (env :port "5000"))]
 
     (alter-var-root #'system
-                    (constantly (rs/system rc/protected-routes port )))
+                    (constantly (rs/system rc/main-routes port )))
 
     )
   )
