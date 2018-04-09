@@ -358,7 +358,7 @@
   ; serve up JSON responses
   )
 
-(def my-app
+(defroutes my-app
   (ANY "*" [] log-route)
   (ANY "*" [] secured-routes)
   )
