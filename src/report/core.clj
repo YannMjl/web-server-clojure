@@ -258,7 +258,8 @@
 
              )
 
-           (route/not-found "<h1>not logged in  or does not exit</h1>")
+           ;(route/not-found "<h1>not logged in  or does not exit</h1>")
+
            )
 
 (defroutes protected-routes (GET "/" []

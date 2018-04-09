@@ -27,8 +27,8 @@
       <file leaf-file-name="core.clj" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/report/core.clj">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="271">
-              <caret line="260" column="47" lean-forward="false" selection-start-line="260" selection-start-column="47" selection-end-line="260" selection-end-column="47" />
+            <state relative-caret-position="273">
+              <caret line="261" column="11" lean-forward="false" selection-start-line="261" selection-start-column="11" selection-end-line="261" selection-end-column="11" />
               <folding />
             </state>
           </provider>
@@ -145,7 +145,7 @@
     <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
-  <component name="ReplState" timestamp="1523302853236">{:repl-history {:ide [], :local [{:command &quot;(+ 4 4)&quot;, :offset 7, :ns &quot;user&quot;} {:command &quot;(doc println)&quot;, :offset 13, :ns &quot;user&quot;} {:command &quot;(doc print)&quot;, :offset 11, :ns &quot;user&quot;} {:command &quot;(print \&quot;hi\&quot;)&quot;, :offset 12, :ns &quot;user&quot;} {:command &quot;(println \&quot;hi\&quot;)&quot;, :offset 14, :ns &quot;hi&quot;} {:command &quot;(require 'report.core)&quot;, :offset 22, :ns &quot;user&quot;} {:command &quot;(report.core/-main)&quot;, :offset 19, :ns &quot;user&quot;} {:command &quot;(appl str \&quot;hi\&quot;)&quot;, :offset 15, :ns &quot;user&quot;} {:command &quot;(\&quot;hi\&quot;)&quot;, :offset 6, :ns &quot;user&quot;} {:command &quot;(+ 2 5)&quot;, :offset 7, :ns &quot;user&quot;} {:command &quot;(apply str \&quot;hi\&quot;)&quot;, :offset 16, :ns &quot;user&quot;} {:command &quot;(stop)&quot;, :offset 6, :ns &quot;user&quot;} {:command &quot;(start)&quot;, :offset 7, :ns &quot;user&quot;}], :remote []}}</component>
+  <component name="ReplState" timestamp="1523303237445">{:repl-history {:ide [], :local [{:command &quot;(+ 4 4)&quot;, :offset 7, :ns &quot;user&quot;} {:command &quot;(doc println)&quot;, :offset 13, :ns &quot;user&quot;} {:command &quot;(doc print)&quot;, :offset 11, :ns &quot;user&quot;} {:command &quot;(print \&quot;hi\&quot;)&quot;, :offset 12, :ns &quot;user&quot;} {:command &quot;(println \&quot;hi\&quot;)&quot;, :offset 14, :ns &quot;hi&quot;} {:command &quot;(require 'report.core)&quot;, :offset 22, :ns &quot;user&quot;} {:command &quot;(report.core/-main)&quot;, :offset 19, :ns &quot;user&quot;} {:command &quot;(appl str \&quot;hi\&quot;)&quot;, :offset 15, :ns &quot;user&quot;} {:command &quot;(\&quot;hi\&quot;)&quot;, :offset 6, :ns &quot;user&quot;} {:command &quot;(+ 2 5)&quot;, :offset 7, :ns &quot;user&quot;} {:command &quot;(apply str \&quot;hi\&quot;)&quot;, :offset 16, :ns &quot;user&quot;} {:command &quot;(stop)&quot;, :offset 6, :ns &quot;user&quot;} {:command &quot;(start)&quot;, :offset 7, :ns &quot;user&quot;}], :remote []}}</component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -439,8 +439,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/report/core.clj">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="271">
-          <caret line="260" column="47" lean-forward="false" selection-start-line="260" selection-start-column="47" selection-end-line="260" selection-end-column="47" />
+        <state relative-caret-position="273">
+          <caret line="261" column="11" lean-forward="false" selection-start-line="261" selection-start-column="11" selection-end-line="261" selection-end-column="11" />
           <folding />
         </state>
       </provider>
