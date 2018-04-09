@@ -45,8 +45,8 @@
   )
 
 ;connect to the database
-(def db (System/getenv "DATABASE_URL"))
-(def db-url (env :database-url))
+(def db-url (System/getenv "DATABASE_URL"))
+;(def db-url (env :database-url))
 
 ;----------------------------------------------------------------------------------------------------------------------*
 ;this section content functions that do multiple operation on the csv file in order to                                 *
@@ -211,7 +211,7 @@
 ;----------------------------------------------------------------------------------------------------------------------*
 
 (defn auth? [username password]
-  (and (= username "admin")
+  (if (= username "admin")
        (= password "pass")
        {:user username :password password})
   )
@@ -245,6 +245,10 @@
 
 (defroutes login-route
 
+           (GET "/" []
+             (apply str "<h1>Hello Welcome! This is a report page of CloudRepo users</h1>")
+             )
+
            (POST "/login" {params :params
                            :as    req
                            }
@@ -252,6 +256,10 @@
              (let [username (get params "username")
                    password (get params "password")
                    ]
+
+               (println username)
+
+               (println password)
 
                (generate-string (isAuthenticated username password))
                )
@@ -262,9 +270,7 @@
 
            )
 
-(defroutes protected-routes (GET "/" []
-                      (apply str "<h1>Hello Welcome! This is a report page of CloudRepo users</h1>")
-                      )
+(defroutes protected-routes
 
            (GET "/report" []
              (generate-string (get-full-report))
@@ -346,7 +352,7 @@
   )
 (def log-route
   (-> login-route
-      wrap-log-request
+      ;wrap-log-request
       wrap-json-response))
 
 (def secured-routes

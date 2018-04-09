@@ -15,61 +15,61 @@
   ;-----------------------------------------------------------------------------------------*
 
   (testing "report data endpoint"
-    (let [response (myroutes (mock/request :get "/report"))]
+    (let [response (main-routes (mock/request :get "/report"))]
       (is (= (:status response) 200))
       (is (= (get-in response [:headers "Content-Type"]) "application-json"))))
 
   (testing "date in report endpoint"
-    (let [response (myroutes (mock/request :get "/date"))]
+    (let [response (main-routes (mock/request :get "/date"))]
       (is (= (:status response) 200))
       (is (= (get-in response [:headers "Content-Type"]) "application-json"))))
 
   (testing "report by date endpoint"
-    (let [response (myroutes (mock/request :get "/date/:input"))]
+    (let [response (main-routes (mock/request :get "/date/:input"))]
       (is (= (:status response) 200))
       (is (= (get-in response [:headers "Content-Type"]) "application-json"))))
 
   (testing " report by date chart-data endpoint"
-    (let [response (myroutes (mock/request :get "/date-chart/:input"))]
+    (let [response (main-routes (mock/request :get "/date-chart/:input"))]
       (is (= (:status response) 200))
       (is (= (get-in response [:headers "Content-Type"]) "application-json"))))
 
   (testing "report by org endpoint"
-    (let [response (myroutes (mock/request :get "/name/:input"))]
+    (let [response (main-routes (mock/request :get "/name/:input"))]
       (is (= (:status response) 200))
       (is (= (get-in response [:headers "Content-Type"]) "application-json"))))
 
   (testing "report by org chart-data endpoint"
-    (let [response (myroutes (mock/request :get "/org/:input"))]
+    (let [response (main-routes (mock/request :get "/org/:input"))]
       (is (= (:status response) 200))
       (is (= (get-in response [:headers "Content-Type"]) "application-json"))))
 
   ;-----------------------------------------------------------------------------------------*
 
   (testing "delete report by date endpoint"
-    (let [response (myroutes (mock/request :get "/delete-date/:input"))]
+    (let [response (main-routes (mock/request :get "/delete-date/:input"))]
       (is (= (:status response) 200))
       (is (= (get-in response [:headers "Content-Type"]) "application-json"))))
 
   (testing "delete report by org endpoint"
-    (let [response (myroutes (mock/request :get "/delete-name/:input"))]
+    (let [response (main-routes (mock/request :get "/delete-name/:input"))]
       (is (= (:status response) 200))
       (is (= (get-in response [:headers "Content-Type"]) "application-json"))))
 
   (testing "delete all record endpoint"
-    (let [response (myroutes (mock/request :get "/delete-all-record"))]
+    (let [response (main-routes (mock/request :get "/delete-all-record"))]
       (is (= (:status response) 200))
       (is (= (get-in response [:headers "Content-Type"]) "application-json"))))
 
   (testing "uploading a file report"
-    (let [response (myroutes (mock/request :post "/file"))]
+    (let [response (main-routes (mock/request :post "/file"))]
       (is (= (:status response) 200))
       (is (= (get-in response [:headers "Content-Type"]) "application-json"))))
 
   ;-----------------------------------------------------------------------------------------*
 
   (testing "not-found route"
-    (let [response (myroutes (mock/request :get "/bogus-route"))]
+    (let [response (main-routes (mock/request :get "/bogus-route"))]
       (is (= (:status response) 404))))
 
   )
