@@ -16,6 +16,7 @@
                  [ring/ring-json "0.5.0-beta1"]
                  [ring/ring-jetty-adapter "1.6.3"]
                  [ring-basic-authentication "1.0.5"]
+                 [ring-token-authentication "0.1.0"]
 
                  [csv-map "0.1.2"]
                  [clj-x256 "0.0.1"]

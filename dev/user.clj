@@ -17,7 +17,7 @@
   (let [port (Integer. (env :port "5000"))]
 
     (alter-var-root #'system
-                    (constantly (rs/system rc/app port )))
+                    (constantly (rs/system rc/my-app port )))
 
     )
   )

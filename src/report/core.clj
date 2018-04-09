@@ -3,7 +3,8 @@
   (:use [clojure.set]
         [clojure.java.io]
         [ring.middleware.json]
-        [compojure.core :refer :all])
+        [compojure.core :refer :all]
+        [ring.middleware.token-authentication])
 
   (:require [clojure.java.io]
             [clojure.data.csv]
@@ -203,6 +204,29 @@
 
   )
 
+
+;----------------------------------------------------------------------------------------------------------------------*
+;this section content authentication functions                                                                         *
+;                                                                                                                      *
+;----------------------------------------------------------------------------------------------------------------------*
+
+(defn auth? [username password]
+  (and (= username "admin")
+       (= password "pass")
+       {:user username :password password})
+  )
+
+(defn isAuthenticated? [username password]
+  (and (= username "admin")
+       (= password "pass")
+       {:token "#You_Are_In!"})
+  )
+
+(defn authenticated? [token]
+  (= token "#You_Are_In!")
+  )
+
+
 ;----------------------------------------------------------------------------------------------------------------------*
 ;this section content functions for routes and route handler                                                           *
 ;REST API configurations are also set here                                                                             *
@@ -219,7 +243,25 @@
    :body    (generate-string request)}
   )
 
-(defroutes myroutes (GET "/" []
+(defroutes login-route
+
+           (POST "/login" {params :params
+                           :as    req
+                           }
+
+             (let [username (get params "username")
+                   password (get params "password")
+                   ]
+
+               (generate-string (isAuthenticated? username password))
+               )
+
+             )
+
+           (route/not-found "<h1>Page not found or does not exit</h1>")
+           )
+
+(defroutes protected-routes (GET "/" []
                       (apply str "<h1>Hello Welcome! This is a report page of CloudRepo users</h1>")
                       )
 
@@ -283,14 +325,6 @@
 
                  )
 
-           (POST "/login" {params :params
-                          :as    req
-                          }
-
-             (println-str req)
-
-             )
-
            (route/not-found "<h1>Page not found or does not exit</h1>")
 
            )
@@ -304,29 +338,29 @@
 ; requests/responses will be "filtered" through our logging handler.                                                   *
 ;----------------------------------------------------------------------------------------------------------------------*
 
-
-
-(defn wra-log-request [handler]
+(defn wrap-log-request [handler]
   (fn [req]             ; return handler function
     (println req)       ; perform logging
     (handler req))      ; pass the request through to the inner handler
   )
+(def log-route
+  (-> login-route
+      wrap-log-request
+      wrap-json-response))
 
-(defn authenticated? [username password]
-  (and (= username "admin")
-       (= password "pass")
-       {:user username :password password})
-  )
-
-(def app
-  (-> myroutes
-      wra-log-request
+(def secured-routes
+  (-> protected-routes
+      wrap-log-request
       wrap-json-response
-      (wrap-basic-authentication authenticated?)
-      ;(wrap-session)
+      (wrap-token-authentication isAuthenticated?)
       )
   ; With this middleware in place, we are all set to parse JSON request bodies and
   ; serve up JSON responses
+  )
+
+(def my-app
+  (ANY "*" [] log-route)
+  (ANY "*" [] secured-routes)
   )
 
 ;----------------------------------------------------------------------------------------------------------------------*
@@ -337,7 +371,7 @@
 (defn -main [& [port]]
   (let [port (Integer. (or port (env :port) 5000))]
 
-    (jetty/run-jetty (wrap-cors (wrap-multipart-params myroutes)
+    (jetty/run-jetty (wrap-cors (wrap-multipart-params my-app)
                                 :access-control-allow-methods [:get :post :delete :options]
                                 :access-control-allow-headers ["Content-Type"]
                                 :access-control-allow-origin [#"https://yannmjl.github.io" #"http://localhost:4200"]
