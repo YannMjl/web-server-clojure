@@ -352,13 +352,13 @@
   (-> protected-routes
       wrap-log-request
       wrap-json-response
-      (wrap-token-authentication isAuthenticated?)
+      ;(wrap-token-authentication isAuthenticated?)
       )
   ; With this middleware in place, we are all set to parse JSON request bodies and
   ; serve up JSON responses
   )
 
-(defroutes my-app
+(defroutes main-routes
   (ANY "*" [] log-route)
   (ANY "*" [] secured-routes)
   )
@@ -371,7 +371,7 @@
 (defn -main [& [port]]
   (let [port (Integer. (or port (env :port) 5000))]
 
-    (jetty/run-jetty (wrap-cors (wrap-multipart-params my-app)
+    (jetty/run-jetty (wrap-cors (wrap-multipart-params main-routes)
                                 :access-control-allow-methods [:get :post :delete :options]
                                 :access-control-allow-headers ["Content-Type"]
                                 :access-control-allow-origin [#"https://yannmjl.github.io" #"http://localhost:4200"]
