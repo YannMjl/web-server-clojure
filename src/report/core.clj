@@ -210,12 +210,6 @@
 ;                                                                                                                      *
 ;----------------------------------------------------------------------------------------------------------------------*
 
-(defn auth? [username password]
-  (if (= username "admin")
-       (= password "pass")
-       {:user username :password password})
-  )
-
 (defn isAuthenticated [username password]
   (and (= username "admin")
        (= password "pass")
@@ -257,14 +251,8 @@
                    password (get params "password")
                    ]
 
-               (println username)
-
-               (println password)
-
                (generate-string (isAuthenticated username password))
                )
-
-             (println "in login post route")
 
              )
 
