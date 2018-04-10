@@ -45,8 +45,8 @@
   )
 
 ;connect to the database
-;(def db-url (System/getenv "DATABASE_URL"))
-(def db-url (env :database-url))
+(def db-url (System/getenv "DATABASE_URL"))
+;(def db-url (env :database-url))
 
 ;----------------------------------------------------------------------------------------------------------------------*
 ;this section content functions that do multiple operation on the csv file in order to                                 *
@@ -264,6 +264,8 @@
                (generate-string (isAuthenticated username password))
                )
 
+             (println "in login post route")
+
              )
 
            ;(route/not-found "<h1>not logged in  or does not exit</h1>")
@@ -359,7 +361,7 @@
   (-> protected-routes
       wrap-log-request
       wrap-json-response
-      (wrap-token-authentication authenticated?)
+      ;(wrap-token-authentication authenticated?)
       )
   ; With this middleware in place, we are all set to parse JSON request bodies and
   ; serve up JSON responses
@@ -378,8 +380,8 @@
   (let [port (Integer. (or port (env :port) 5000))]
 
     (jetty/run-jetty (wrap-cors (wrap-multipart-params main-routes)
-                                :access-control-allow-methods [:get :post :delete :options]
-                                :access-control-allow-headers ["Content-Type"]
+                                :access-control-allow-methods #{:get :post :delete :options}
+                                :access-control-allow-headers #{:accept :content-type}
                                 :access-control-allow-origin [#"https://yannmjl.github.io" #"http://localhost:4200"]
                                 )
                      {:port port :join? false}

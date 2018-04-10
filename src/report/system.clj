@@ -52,7 +52,7 @@
         server (jetty/run-jetty (wrap-cors (wrap-multipart-params (:route system))
                                            :access-control-allow-methods [:get :post :delete :options]
                                            :access-control-allow-headers ["Accept, Content-Type"]
-                                           :access-control-allow-origin [#"http://localhost:4200"  #"https://yannmjl.github.io"]
+                                           :access-control-allow-origin [#"http://localhost:4200" #"https://yannmjl.github.io"]
                                            )
                                 {:port port :join? false})]
     (assoc system :webserver server))
