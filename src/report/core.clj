@@ -16,11 +16,11 @@
             [clj-time.coerce :as clt]
             [environ.core :refer [env]]
 
-    ;[buddy.hashers :as hashers]
+    ;       [buddy.hashers :as hashers]
     ;       [buddy.auth.accessrules :refer [restrict]]
     ;       [buddy.auth.backends.session :refer [session-backend]]
     ;       [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
-
+            [ring.util.http-response :as http]
             [ring.adapter.jetty :as jetty]
             [ring.util.response :refer [response]]
             [ring.middleware.cors :refer [wrap-cors]]
@@ -263,6 +263,7 @@
 (defroutes protected-routes
 
            (GET "/report" []
+             (println "in get report")
              (generate-string (get-full-report))
 
              )
@@ -335,6 +336,28 @@
 ; requests/responses will be "filtered" through our logging handler.                                                   *
 ;----------------------------------------------------------------------------------------------------------------------*
 
+(defn allow-cross-origin
+  "Middleware function to allow cross origin requests from browsers.
+
+  When a browser attempts to call an API from a different domain, it makes an OPTIONS request first to see the server's
+  cross origin policy.  So, in this method we return that when an OPTIONs request is made.
+
+  Additionally, for non OPTIONS requests, we need to just returm the 'Access-Control-Allow-Origin' header or else the browser won't read the data properly.
+
+  The above notes are all based on how Chrome works. "
+  ([handler]
+   (allow-cross-origin handler "*"))
+  ([handler allowed-origins]
+   (fn [request]
+     (if (= (request :request-method) :options)
+       (-> (http/ok)                                        ; Don't pass the requests down, just return what the browser needs to continue.
+           (assoc-in [:headers "Access-Control-Allow-Origin"] allowed-origins)
+           (assoc-in [:headers "Access-Control-Allow-Methods"] "GET,POST,DELETE")
+           (assoc-in [:headers "Access-Control-Allow-Headers"] "X-Requested-With,Content-Type,Cache-Control,Origin,Accept,Authorization")
+           (assoc :status 200))
+       (-> (handler request)                                ; Pass the request on, but make sure we add this header for CORS support in Chrome.
+           (assoc-in [:headers "Access-Control-Allow-Origin"] allowed-origins))))))
+
 (defn wrap-log-request [handler]
   (fn [req]             ; return handler function
     (println req)       ; perform logging
@@ -349,14 +372,16 @@
   (-> protected-routes
       wrap-log-request
       wrap-json-response
-      (wrap-basic-authentication isAuthenticated)
+      ;(wrap-token-authentication authenticated?)
       )
   ; With this middleware in place, we are all set to parse JSON request bodies and
   ; serve up JSON responses
   )
 
 (def main-routes
-  (routes log-route secured-routes)
+  (-> (routes log-route secured-routes)
+      (allow-cross-origin)
+    )
   )
 
 ;----------------------------------------------------------------------------------------------------------------------*

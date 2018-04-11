@@ -17,6 +17,7 @@
                  [ring/ring-jetty-adapter "1.6.3"]
                  [ring-basic-authentication "1.0.5"]
                  [ring-token-authentication "0.1.0"]
+                 [metosin/ring-http-response "0.9.0"]
 
                  [csv-map "0.1.2"]
                  [clj-x256 "0.0.1"]
@@ -45,7 +46,8 @@
          :auto-refresh? false}
 
   :profiles {:dev {:source-paths ["dev"]
-                   :dependencies [[ring-mock "0.1.5"]
+                   :dependencies [[ring "1.6.3"]
+                                  [ring-mock "0.1.5"]
                                   [org.clojure/java.classpath "0.2.3"]
                                   [javax.servlet/servlet-api "3.0-alpha-1"]
                                   [org.clojure/tools.namespace "0.3.0-alpha4"]]
