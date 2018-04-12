@@ -375,7 +375,7 @@
   (-> protected-routes
       wrap-log-request
       wrap-json-response
-      (wrap-basic-authentication auth?)
+      ;(wrap-token-authentication authenticated?)
       )
   ; With this middleware in place, we are all set to parse JSON request bodies and
   ; serve up JSON responses
