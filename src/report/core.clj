@@ -209,6 +209,9 @@
 ;this section content authentication functions                                                                         *
 ;                                                                                                                      *
 ;----------------------------------------------------------------------------------------------------------------------*
+(defn auth? [name pass]
+  (and (= name "admin")
+       (= pass "pass")))
 
 (defn isAuthenticated [username password]
   (and (= username "admin")
@@ -250,7 +253,7 @@
              (let [username (get params "username")
                    password (get params "password")
                    ]
-
+               (auth? username password)
                (generate-string (isAuthenticated username password))
                )
 
@@ -372,7 +375,7 @@
   (-> protected-routes
       wrap-log-request
       wrap-json-response
-      ;(wrap-token-authentication authenticated?)
+      (wrap-basic-authentication auth?)
       )
   ; With this middleware in place, we are all set to parse JSON request bodies and
   ; serve up JSON responses
