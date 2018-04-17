@@ -102,8 +102,8 @@
         _date (clt/to-sql-date (clt/to-string date))]
 
     (cj/insert! db-url :cloudrepo_report {:organization _name
-                                      :size         _size
-                                      :date         _date})
+                                          :size         _size
+                                          :date         _date})
     )
   )
 
@@ -209,9 +209,11 @@
 ;this section content authentication functions                                                                         *
 ;                                                                                                                      *
 ;----------------------------------------------------------------------------------------------------------------------*
-(defn auth? [name pass]
-  (and (= name "admin")
-       (= pass "pass")))
+(defn auth? [username password]
+  (and (= username "admin")
+       (= password "pass")
+       {:user username :password password})
+  )
 
 (defn isAuthenticated [username password]
   (and (= username "admin")
@@ -253,8 +255,10 @@
              (let [username (get params "username")
                    password (get params "password")
                    ]
-               (auth? username password)
-               (generate-string (isAuthenticated username password))
+               (do
+                 (auth? username password)
+                 (generate-string (isAuthenticated username password))
+                 )
                )
 
              )
@@ -345,7 +349,8 @@
   When a browser attempts to call an API from a different domain, it makes an OPTIONS request first to see the server's
   cross origin policy.  So, in this method we return that when an OPTIONs request is made.
 
-  Additionally, for non OPTIONS requests, we need to just returm the 'Access-Control-Allow-Origin' header or else the browser won't read the data properly.
+  Additionally, for non OPTIONS requests, we need to just returm the 'Access-Control-Allow-Origin' header or else
+  the browser won't read the data properly.
 
   The above notes are all based on how Chrome works. "
   ([handler]
@@ -353,12 +358,12 @@
   ([handler allowed-origins]
    (fn [request]
      (if (= (request :request-method) :options)
-       (-> (http/ok)                                        ; Don't pass the requests down, just return what the browser needs to continue.
+       (-> (http/ok)                     ; Don't pass the requests down, just return what the browser needs to continue.
            (assoc-in [:headers "Access-Control-Allow-Origin"] allowed-origins)
            (assoc-in [:headers "Access-Control-Allow-Methods"] "GET,POST,DELETE")
            (assoc-in [:headers "Access-Control-Allow-Headers"] "X-Requested-With,Content-Type,Cache-Control,Origin,Accept,Authorization")
            (assoc :status 200))
-       (-> (handler request)                                ; Pass the request on, but make sure we add this header for CORS support in Chrome.
+       (-> (handler request)         ; Pass the request on, but make sure we add this header for CORS support in Chrome.
            (assoc-in [:headers "Access-Control-Allow-Origin"] allowed-origins))))))
 
 (defn wrap-log-request [handler]
@@ -375,6 +380,7 @@
   (-> protected-routes
       wrap-log-request
       wrap-json-response
+      (wrap-basic-authentication auth?)
       ;(wrap-token-authentication authenticated?)
       )
   ; With this middleware in place, we are all set to parse JSON request bodies and
