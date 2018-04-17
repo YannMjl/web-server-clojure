@@ -245,7 +245,7 @@
 (defroutes login-route
 
            (GET "/" []
-             (apply str "<h1>Hello Welcome! This is a report page of CloudRepo users</h1>")
+             (generate-string (apply str "<h1>Hello Welcome! This is a report page of CloudRepo users</h1>"))
              )
 
            (POST "/login" {params :params
