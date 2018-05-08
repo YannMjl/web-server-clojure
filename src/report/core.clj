@@ -362,9 +362,12 @@
            (assoc-in [:headers "Access-Control-Allow-Origin"] allowed-origins)
            (assoc-in [:headers "Access-Control-Allow-Methods"] "GET,POST,DELETE")
            (assoc-in [:headers "Access-Control-Allow-Headers"] "X-Requested-With,Content-Type,Cache-Control,Origin,Accept,Authorization")
-           (assoc :status 200))
+           (assoc :status 200)
+           )
        (-> (handler request)         ; Pass the request on, but make sure we add this header for CORS support in Chrome.
-           (assoc-in [:headers "Access-Control-Allow-Origin"] allowed-origins))))))
+           (assoc-in [:headers "Access-Control-Allow-Origin"] allowed-origins))))
+    )
+  )
 
 (defn wrap-log-request [handler]
   (fn [req]             ; return handler function
