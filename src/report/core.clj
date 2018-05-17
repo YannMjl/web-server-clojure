@@ -16,10 +16,6 @@
             [clj-time.coerce :as clt]
             [environ.core :refer [env]]
 
-    ;       [buddy.hashers :as hashers]
-    ;       [buddy.auth.accessrules :refer [restrict]]
-    ;       [buddy.auth.backends.session :refer [session-backend]]
-    ;       [buddy.auth.middleware :refer [wrap-authentication wrap-authorization]]
             [ring.util.http-response :as http]
             [ring.adapter.jetty :as jetty]
             [ring.util.response :refer [response]]
