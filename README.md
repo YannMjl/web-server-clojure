@@ -1,6 +1,5 @@
 # web-server-clojure
-
-This project demostrate how to built a web server with clojure, how to set APIs and basic authentication.  
+This is a back-end web server development with Clojure/Leiningen. It demonstrates how to read a CSV file and generate a report which is then stored in PostgreSQL database. Everything is deployed and run as an Heroku app. It also demostrates how to use RESTfull APIs in clojure and basic authentication.  
 
 ## Usage
 
